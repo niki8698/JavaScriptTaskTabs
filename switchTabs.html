@@ -1,40 +1,46 @@
-
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Hello Ashwin Sir!</title>
-  </head>
-  <body>
-   
-      <h1 class="title">Hello Ashwin Sir! </h1>
-      <button data-key='tab1'>tab1</button>
-      <button data-key='tab2'>tab2</button>
-      <button data-key='tab3'>tab3</button>
-      <p id="myTab"></p>
-      <script>
-        const tabs=document.querySelectorAll('button')
-        tabs.forEach((el)=>{el.addEventListener('click',function(){ 
-          handleTab(this.dataset.key)
-        })})
-        handleTab('tab1')
-        function tabContent(key) {
-          switch (key) {
-            case 'tab1' :
-              return '<div>Hello Tab1</div>'
-            case 'tab2' :
-              return '<div>Hello Tab2</div>'
-            case 'tab3' :
-              return '<div>Hello Tab3</div>'
-            default : return ''
-              break
-          }
-        }
-       
-        function handleTab(key) {
-          document.querySelector('#myTab').innerHTML = ""
-          document.querySelector('#myTab').innerHTML = tabContent(key)
-        }
 
-      </script>
-  </body>
+<head>
+  <title>Hello Ashwin Sir!</title>
+  <style>
+    .tab-content {
+      display: none;
+    }
+
+    .show {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1 class="title">Hello Ashwin Sir! </h1>
+  <button data-key='tab1'>tab1</button>
+  <button data-key='tab2'>tab2</button>
+  <button data-key='tab3'>tab3</button>
+  <p id="myTab">
+    <div class="tab-content" id='tab1'>This is Tab1</div>
+    <div class="tab-content" id='tab2'>This is Tab2</div>
+    <div class="tab-content" id='tab3'>This is Tab3</div>
+  </p>
+  <script>
+    tabContent('tab1')
+    const tabs = document.querySelectorAll('button')
+    tabs.forEach((el) => {
+      el.addEventListener('click', function () {
+        tabContent(this.dataset.key)
+      })
+    })
+
+    function tabContent(key) {
+      const tabContent = document.querySelectorAll('.tab-content')
+      tabContent.forEach((el) => {
+        el.id === key ? el.classList.add('show'):el.classList.remove('show')
+      })
+    }
+  </script>
+</body>
+
 </html>
